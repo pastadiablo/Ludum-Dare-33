@@ -4,7 +4,7 @@ using Pathfinding;
 
 public class Kine : MonoBehaviour {
 
-	protected static float PANIC_FACTOR = 2.0f;
+	protected static float PANIC_FACTOR = 30.0f;
 	
 	protected float BaseSpeed;
 	protected float BaseTurningSpeed;
@@ -15,37 +15,52 @@ public class Kine : MonoBehaviour {
 
 	[SerializeField]
 	protected bool _isPanicked;
+	[HideInInspector]
 	public bool IsPanicked {
 		get { return _isPanicked; }
 		set {
 			this.AI.speed = (value ? PANIC_FACTOR * BaseSpeed : BaseSpeed);
-			this.AI.turningSpeed = (value ? BaseTurningSpeed / PANIC_FACTOR : BaseTurningSpeed);
+			this.AI.turningSpeed = (value ? BaseTurningSpeed / PANIC_FACTOR * 10 : BaseTurningSpeed);
 			_isPanicked = value;
 		}
 	}
 
 	[SerializeField]
 	protected bool _isDead;
+	[HideInInspector]
 	public bool IsDead {
 		get { return _isDead; }
-		set { _isDead = value; }
+		set { 
+			this.AI.speed = (value ? 0 : BaseSpeed);
+			_isDead = value;
+		}
 	}
 
-	public int Blood;
+	[SerializeField]
+	protected int _blood;
+	public int Blood {
+		get { return _blood; }
+		set {
+			_blood = Mathf.Max(value, 0);
+
+			if(_blood == 0) {
+				this.IsDead = true;
+			}
+		}
+	}
 
 	void Awake () {
 		this.AI = GetComponent<MineBotAI>();
 		BaseSpeed = this.AI.speed;
 		BaseTurningSpeed = this.AI.speed;
-
-		_isPanicked = false;
-		_isDead = false;
-
 	}
 
 	// Use this for initialization
 	void Start () {
 		this.AI.OnTargetReachedEvent += TargetReached;
+		IsPanicked = _isPanicked;
+		Blood = _blood;
+		IsDead = _isDead;
 	}
 	
 	// Update is called once per frame
@@ -58,6 +73,20 @@ public class Kine : MonoBehaviour {
 
 		if (this.IsPanicked) {
 			this.IsPanicked = false;
+		}
+	}
+
+	void OnTriggerEnter ( Collider collider){
+		if (collider.gameObject == this.gameObject)
+			return;
+
+		Kine otherKine = collider.gameObject.GetComponent<Kine> ();
+		if(otherKine && otherKine.gameObject.layer == 9) { // Humanoids
+			// Freak out!
+			if(otherKine.IsDead) {
+				Debug.LogWarning("PANIC: " + this.gameObject.name + " saw " + otherKine.gameObject.name);
+				this.IsPanicked = true;
+			}
 		}
 	}
 }
