@@ -40,23 +40,19 @@ public class Vampire : MonoBehaviour {
 
 		if(Input.GetKey(KeyCode.W)) { //UP 
 			movement = new Vector2(movement.x, moveSpeed);
-			animator.Play("WalkUp");
 			currentState = VampireState.WALKING;
 		}
 		else if(Input.GetKey(KeyCode.S)) { //DOWN
 			movement = new Vector2(movement.x, -moveSpeed);
-			animator.Play("WalkDown");
 			currentState = VampireState.WALKING;
 		}
 		
 		if(Input.GetKey(KeyCode.A)) { //LEFT
 			movement = new Vector2(-moveSpeed, movement.y);
-			animator.Play("WalkLeft");
 			currentState = VampireState.WALKING;
 		}
 		else if(Input.GetKey(KeyCode.D)) { //RIGHT
 			movement = new Vector2(moveSpeed, movement.y);
-			animator.Play("WalkRight");
 			currentState = VampireState.WALKING;
 		}
 	
@@ -68,13 +64,18 @@ public class Vampire : MonoBehaviour {
 		case VampireState.IDLE:
 
 			//TODO: remember last direction
-			animator.Play("IdleDown");
+			animator.SetBool("moving", false);
 			break;
 
 		case VampireState.WALKING:
+			
+			animator.SetBool("moving", true);
 
 			break;
 		}
+
+		animator.SetInteger("horizontal", (int)movement.x);
+		animator.SetInteger("vertical", (int)movement.y);
 
 		transform.position = new Vector3(transform.position.x + movement.x * Time.deltaTime,
 		                                 transform.position.y + movement.y * Time.deltaTime,
