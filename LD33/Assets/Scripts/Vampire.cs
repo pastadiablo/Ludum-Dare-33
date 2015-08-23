@@ -8,6 +8,7 @@ public class Vampire : MonoBehaviour {
 	public enum VampireState {
 		IDLE,
 		WALKING,
+		RUNNING
 	};
 
 	public Vector2 movement;
@@ -56,8 +57,11 @@ public class Vampire : MonoBehaviour {
 			currentState = VampireState.WALKING;
 		}
 	
-		if(movement.x == 0.0f && movement.y == 0.0f)
+		if (movement.x == 0.0f && movement.y == 0.0f) {
 			currentState = VampireState.IDLE;
+		} else if (Input.GetKey (KeyCode.LeftShift)) {
+			currentState = VampireState.RUNNING;
+		}
 
 		switch(currentState) {
 
@@ -68,6 +72,7 @@ public class Vampire : MonoBehaviour {
 			break;
 
 		case VampireState.WALKING:
+		case VampireState.RUNNING:
 			
 			animator.SetBool("moving", true);
 
@@ -77,8 +82,8 @@ public class Vampire : MonoBehaviour {
 		animator.SetInteger("horizontal", (int)movement.x);
 		animator.SetInteger("vertical", (int)movement.y);
 
-		transform.position = new Vector3(transform.position.x + movement.x * Time.deltaTime,
-		                                 transform.position.y + movement.y * Time.deltaTime,
-		                                 0);
+		transform.localPosition = new Vector3(transform.localPosition.x + movement.x * Time.deltaTime,
+		                                      transform.localPosition.y + movement.y * Time.deltaTime,
+		                                      0);
 	}
 }

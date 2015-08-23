@@ -22,6 +22,10 @@ public class Kine : MonoBehaviour {
 			this.AI.speed = (value ? PANIC_FACTOR * BaseSpeed : BaseSpeed);
 			this.AI.turningSpeed = (value ? BaseTurningSpeed / PANIC_FACTOR * 10 : BaseTurningSpeed);
 			_isPanicked = value;
+
+			if(_isPanicked) {
+				OnTargetReached(this); // Requests new random destination
+			}
 		}
 	}
 
@@ -85,6 +89,15 @@ public class Kine : MonoBehaviour {
 			// Freak out!
 			if(otherKine.IsDead) {
 				Debug.LogWarning("PANIC: " + this.gameObject.name + " saw " + otherKine.gameObject.name);
+				this.IsPanicked = true;
+			}
+		}
+
+		Vampire player = collider.gameObject.GetComponent<Vampire> ();
+		if(player && player.gameObject.layer == 10) { // Player
+			// Freak out!
+			if(player.currentState == Vampire.VampireState.WALKING) {
+				Debug.LogWarning("PANIC: " + this.gameObject.name + " saw the player running!");
 				this.IsPanicked = true;
 			}
 		}

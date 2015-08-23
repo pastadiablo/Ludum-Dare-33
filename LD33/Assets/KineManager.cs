@@ -26,7 +26,7 @@ public class KineManager : MonoBehaviour {
 
 			kine.AI.target = kineTarget.transform;
 
-			kine.OnTargetReached += KineReachedTarget;
+			kine.OnTargetReached += KineNeedsNewDestination;
 		}
 	}
 	
@@ -39,7 +39,7 @@ public class KineManager : MonoBehaviour {
 		return new Vector3 (Random.value * 48 + 1, 0, Random.value * 48 + 1);
 	}
 
-	public void KineReachedTarget(Kine kine){
+	public void KineNeedsNewDestination(Kine kine){
 		kine.AI.target.localPosition = new Vector3 (Random.value * 49, 0, Random.value * 49);
 	}
 }
