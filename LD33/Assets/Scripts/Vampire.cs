@@ -20,6 +20,7 @@ public class Vampire : MonoBehaviour {
 
 	public VampireState currentState;
 
+	protected bool sittingOnAKine = false;
 	Animator animator;
 
 	// Use this for initialization
@@ -114,9 +115,8 @@ public class Vampire : MonoBehaviour {
 	public void EndPounce() {
 		animator.SetBool("pouncing", false);
 		currentState = VampireState.IDLE;
-
-		//TODO: check for kine collision
-		if(true) {
+		
+		if(sittingOnAKine) {
 			currentState = VampireState.FEEDING;
 			animator.SetBool("feeding", true);
 		}
@@ -125,5 +125,29 @@ public class Vampire : MonoBehaviour {
 	public void EndFeeding() {
 		animator.SetBool("feeding", false);
 		currentState = VampireState.IDLE;
+	}
+
+	void OnTriggerEnter ( Collider collider){
+		if (collider.gameObject == this.gameObject)
+			return;
+
+		// Make note of Kine the player sits upon
+		Kine otherKine = collider.gameObject.GetComponent<Kine> ();
+		if(otherKine && otherKine.gameObject.layer == 9) { // Humanoids
+			sittingOnAKine = true;
+		}
+		else if(collider.gameObject.layer == 8) { // PathAround
+
+		}
+	}
+
+	void OnTriggerExit ( Collider collider){
+		if (collider.gameObject == this.gameObject)
+			return;
+		
+		Kine otherKine = collider.gameObject.GetComponent<Kine> ();
+		if(otherKine && otherKine.gameObject.layer == 9) { // Humanoids
+			sittingOnAKine = false;
+		}
 	}
 }

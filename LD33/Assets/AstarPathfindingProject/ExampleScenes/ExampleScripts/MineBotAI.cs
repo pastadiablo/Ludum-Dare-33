@@ -95,7 +95,7 @@ namespace Pathfinding {
 				Vector3 dir = CalculateVelocity (GetFeetPosition());
 				
 				//Rotate towards targetDirection (filled in by CalculateVelocity)
-				RotateTowards (targetDirection);
+				//RotateTowards (targetDirection);
 				
 				dir.y = 0;
 				if (dir.sqrMagnitude > sleepVelocity*sleepVelocity) {
@@ -108,7 +108,8 @@ namespace Pathfinding {
 				if (navController != null) {
 					velocity = Vector3.zero;
 				} else if (controller != null) {
-					controller.SimpleMove (dir);
+					//controller.SimpleMove (dir);
+					controller.Move (dir);
 					velocity = controller.velocity;
 				} else {
 					Debug.LogWarning ("No NavmeshController or CharacterController attached to GameObject");
@@ -125,8 +126,8 @@ namespace Pathfinding {
 			Vector3 relVelocity = tr.InverseTransformDirection (velocity);
 			relVelocity.y = 0;
 
-			animator.SetInteger("horizontal", (int)relVelocity.x);
-			animator.SetInteger("vertical", (int)relVelocity.y);
+			animator.SetInteger("horizontal", (int)velocity.x);
+			animator.SetInteger("vertical", (int)velocity.z);
 
 			if (velocity.sqrMagnitude <= sleepVelocity*sleepVelocity) {
 				//Fade out walking animation
