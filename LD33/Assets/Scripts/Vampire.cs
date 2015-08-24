@@ -107,9 +107,12 @@ public class Vampire : MonoBehaviour {
 		movement.Normalize();
 		movement *= moveSpeed * Time.deltaTime;
 
-		transform.localPosition = new Vector3(transform.localPosition.x + movement.x,
+		this.GetComponent<CharacterController>().Move(new Vector3(movement.x,
+		                                                          0,
+		                                                          movement.y));
+		/*transform.localPosition = new Vector3(transform.localPosition.x + movement.x,
 		                                      transform.localPosition.y + movement.y,
-		                                      0);
+		                                      0);*/
 	}
 
 	public void EndPounce() {
