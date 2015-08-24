@@ -103,8 +103,11 @@ public class Vampire : MonoBehaviour {
 		animator.SetInteger("horizontal", (int)movement.x);
 		animator.SetInteger("vertical", (int)movement.y);
 
-		transform.localPosition = new Vector3(transform.localPosition.x + movement.x * Time.deltaTime * moveSpeed,
-		                                      transform.localPosition.y + movement.y * Time.deltaTime * moveSpeed,
+		movement.Normalize();
+		movement *= moveSpeed * Time.deltaTime;
+
+		transform.localPosition = new Vector3(transform.localPosition.x + movement.x,
+		                                      transform.localPosition.y + movement.y,
 		                                      0);
 	}
 
