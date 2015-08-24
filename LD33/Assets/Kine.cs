@@ -96,7 +96,7 @@ public class Kine : MonoBehaviour {
 		Vampire player = collider.gameObject.GetComponent<Vampire> ();
 		if(player && player.gameObject.layer == 10) { // Player
 			// Freak out!
-			if(player.currentState == Vampire.VampireState.WALKING) {
+			if(player.currentState == Vampire.VampireState.RUNNING) {
 				Debug.LogWarning("PANIC: " + this.gameObject.name + " saw the player running!");
 				this.IsPanicked = true;
 			}

@@ -7,7 +7,8 @@ public class Vampire : MonoBehaviour {
 		IDLE,
 		WALKING,
 		RUNNING,
-		POUNCING
+		POUNCING,
+		FEEDING
 	};
 
 	public Vector2 movement;
@@ -83,6 +84,7 @@ public class Vampire : MonoBehaviour {
 		case VampireState.RUNNING:
 			
 			animator.SetBool("moving", true);
+			animator.SetBool("feeding", false);
 
 			break;
 		case VampireState.POUNCING:
@@ -91,6 +93,9 @@ public class Vampire : MonoBehaviour {
 			animator.SetBool("moving", false);
 			moveSpeed = pounceSpeed;
 
+			break;
+		case VampireState.FEEDING:
+			animator.SetBool("feeding", true);
 			break;
 		}
 
@@ -105,6 +110,17 @@ public class Vampire : MonoBehaviour {
 
 	public void EndPounce() {
 		animator.SetBool("pouncing", false);
+		currentState = VampireState.IDLE;
+
+		//TODO: check for kine collision
+		if(true) {
+			currentState = VampireState.FEEDING;
+			animator.SetBool("feeding", true);
+		}
+	}
+
+	public void EndFeeding() {
+		animator.SetBool("feeding", false);
 		currentState = VampireState.IDLE;
 	}
 }

@@ -16,4 +16,8 @@ public class AnimationFunctionRelayer : MonoBehaviour {
 	public void EndPounce() {
 		GetComponentInParent<Vampire>().EndPounce();
 	}
+
+	public void EndFeeding() {
+		GetComponentInParent<Vampire>().EndFeeding();
+	}
 }

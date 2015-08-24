@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: b2439d7feb6e5fb4289126fe311b2f9a
-timeCreated: 1440374965
+timeCreated: 1440390454
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -52,6 +52,15 @@ TextureImporter:
     21300090: Vampire_27
     21300092: Vampire_28
     21300094: Vampire_29
+    21300096: Vampire_30
+    21300098: Vampire_31
+    21300100: Vampire_32
+    21300102: Vampire_33
+    21300104: Vampire_34
+    21300106: Vampire_35
+    21300108: Vampire_36
+    21300110: Vampire_37
+    21300112: Vampire_38
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -390,7 +399,97 @@ TextureImporter:
     - name: Vampire_29
       rect:
         serializedVersion: 2
+        x: 0
+        y: 256
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Vampire_30
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 256
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Vampire_31
+      rect:
+        serializedVersion: 2
         x: 64
+        y: 256
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Vampire_32
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 256
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Vampire_33
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 256
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Vampire_34
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 256
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Vampire_35
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 256
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Vampire_36
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 256
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Vampire_37
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 256
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Vampire_38
+      rect:
+        serializedVersion: 2
+        x: 288
         y: 256
         width: 32
         height: 32
