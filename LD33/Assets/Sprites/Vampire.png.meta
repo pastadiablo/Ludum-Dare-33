@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: b2439d7feb6e5fb4289126fe311b2f9a
-timeCreated: 1440295954
+timeCreated: 1440374965
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -46,6 +46,12 @@ TextureImporter:
     21300078: Vampire_21
     21300080: Vampire_22
     21300082: Vampire_23
+    21300084: Vampire_24
+    21300086: Vampire_25
+    21300088: Vampire_26
+    21300090: Vampire_27
+    21300092: Vampire_28
+    21300094: Vampire_29
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -326,6 +332,66 @@ TextureImporter:
         serializedVersion: 2
         x: 64
         y: 320
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Vampire_24
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 288
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Vampire_25
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 288
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Vampire_26
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 288
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Vampire_27
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 288
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Vampire_28
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 288
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Vampire_29
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 256
         width: 32
         height: 32
       alignment: 0
