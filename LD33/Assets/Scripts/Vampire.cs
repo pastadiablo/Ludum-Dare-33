@@ -18,19 +18,36 @@ public class Vampire : MonoBehaviour {
 	public float pounceSpeed = 3.0f;
 	float moveSpeed;
 
+	protected float _blood;
+	public float Blood {
+		get { return _blood; }
+		set { 
+			_blood = Mathf.Max(0,Mathf.Min (100, value));
+		}
+	}
+
+	protected float DRAIN_SPEED = 1.0f;
 	public VampireState currentState;
 
-	protected bool sittingOnAKine = false;
+	protected Kine sittingOnAKine = null;
 	Animator animator;
 
 	// Use this for initialization
 	void Start () {
 		animator = GetComponentInChildren<Animator>();
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
-	
+		if (currentState == VampireState.FEEDING && sittingOnAKine) {
+			sittingOnAKine.IsDead = true;
+			sittingOnAKine.Blood -= (int)(Time.deltaTime * DRAIN_SPEED);
+			this.Blood += (int)(Time.deltaTime * DRAIN_SPEED);
+			if(sittingOnAKine.Blood <= 0 || sittingOnAKine.IsDead) {
+				this.EndFeeding();
+			}
+		}
+
 		if(currentState != VampireState.POUNCING) {
 
 			//If player holding down left-shift, set movement speed to run, otherwise, to walk
@@ -97,6 +114,7 @@ public class Vampire : MonoBehaviour {
 			break;
 		case VampireState.FEEDING:
 			animator.SetBool("feeding", true);
+
 			break;
 		}
 
@@ -110,9 +128,8 @@ public class Vampire : MonoBehaviour {
 		this.GetComponent<CharacterController>().Move(new Vector3(movement.x,
 		                                                          0,
 		                                                          movement.y));
-		/*transform.localPosition = new Vector3(transform.localPosition.x + movement.x,
-		                                      transform.localPosition.y + movement.y,
-		                                      0);*/
+
+		// currentState = VampireState.FEEDING;
 	}
 
 	public void EndPounce() {
@@ -127,6 +144,7 @@ public class Vampire : MonoBehaviour {
 
 	public void EndFeeding() {
 		animator.SetBool("feeding", false);
+		sittingOnAKine = null;
 		currentState = VampireState.IDLE;
 	}
 
@@ -137,10 +155,7 @@ public class Vampire : MonoBehaviour {
 		// Make note of Kine the player sits upon
 		Kine otherKine = collider.gameObject.GetComponent<Kine> ();
 		if(otherKine && otherKine.gameObject.layer == 9) { // Humanoids
-			sittingOnAKine = true;
-		}
-		else if(collider.gameObject.layer == 8) { // PathAround
-
+			sittingOnAKine = otherKine;
 		}
 	}
 
@@ -149,8 +164,8 @@ public class Vampire : MonoBehaviour {
 			return;
 		
 		Kine otherKine = collider.gameObject.GetComponent<Kine> ();
-		if(otherKine && otherKine.gameObject.layer == 9) { // Humanoids
-			sittingOnAKine = false;
+		if(otherKine && otherKine.gameObject.layer == 9 && otherKine == sittingOnAKine) { // Humanoids
+			sittingOnAKine = null;
 		}
 	}
 }
